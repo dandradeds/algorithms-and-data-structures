@@ -66,9 +66,9 @@ function DoublyLinkedList(){
         }
     }
 
-    this.removeAt = function(position){//2
-        if(position > - 1 && position < length){//true
-            var current = head, //joao
+    this.removeAt = function(position){
+        if(position > - 1 && position < length){
+            var current = head, 
             previous,
             index = 0
 
@@ -85,11 +85,11 @@ function DoublyLinkedList(){
                 tail = current.prev 
                 tail.next = null 
             } else {
-                while(index++ < position){ //2 < 2
-                    previous = current //Ana
-                    current = current.next //Jose
+                while(index++ < position){ 
+                    previous = current 
+                    current = current.next 
                 }
-                previous.next = current.next //Maria
+                previous.next = current.next 
                 current.next.prev = previous 
             }
             length--
@@ -148,18 +148,3 @@ function DoublyLinkedList(){
 
     }
 }
-
-var dll = new DoublyLinkedList()
-dll.append('João')
-dll.append('José')
-dll.append('Maria')
-dll.insert(0, 'Carlos')
-dll.insert(4, 'Lucas')
-dll.insert(2, 'Ana')
-dll.print()
-dll.removeAt(0)
-dll.print()
-dll.removeAt(4)
-dll.print()
-dll.removeAt(2)
-dll.print()
