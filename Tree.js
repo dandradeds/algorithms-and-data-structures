@@ -1,81 +1,77 @@
-function BinarySearchTree(){
-    var Node = function(key){
-        this.key = key 
+function BinarySearchTree() {
+    var Node = function(key) {
+        this.key = key
         this.left = null
         this.right = null
     }
     var root = null
 
-    this.insert = function(key){ 
-        var newNode = new Node(key) 
+    this.insert = function(key) {
+        var newNode = new Node(key)
 
-        if(root === null){ 
-            root = newNode 
+        if(root === null) {
+            root = newNode
         } else {
-            insertNode(root, newNode) 
+            insertNode(root, newNode)
         }
     }
-
     
-    
-    
-
-    var insertNode = function(node, newNode){ 
-        if(newNode.key < node.key){    
-            if(node.left === null){  
-                node.left = newNode  
-            } else { 
-                insertNode(node.left, newNode)  
-            }
-        } else { 
-            if(node.right === null){   //true
-                node.right = newNode //20
+    var insertNode = function(node, newNode) {
+        if(node.key > newNode.key) {
+            if(node.left === null) {
+                node.left = newNode
             } else {
-                insertNode(node.right, newNode) //15, 20
+                insertNode(node.left, newNode)
+            }
+        } else {
+            if(node.right === null) {
+                node.right = newNode
+            } else {
+                insertNode(node.right, newNode)
             }
         }
     }
 
-    this.search = function(key){//16
-        return searchNode(root, key)//11, 16
+    this.search = function(key) {
+        return searchNode(root, key)
     }
 
-    var searchNode = function(node, key){ //18, 16
-        if(node === null){ //false
+    var searchNode = function(node, key) {
+        if(node === null) {
             return false
         }
-        if(key < node.key){ //16 < 18
-            return searchNode(node.left, key) //18, 16
-        } else if(key > node.key){ 
-            return searchNode(node.right, key) 
+        if(key < node.key) {
+            return searchNode(node.left, key)
+        } else if(key > node.key) {
+            return searchNode(node.right, key)
         } else {
             return true
         }
     }
 
-    this.remove = function(key){
-        root = this.removeNode(root, key)
+    this.remove = function(key) {
+        root = removeNode(root, key)
     }
 
-    var removeNode = function(node, key){
-        if(node === null){
+    var removeNode = function(node, key) {
+        if(node === null) {
             return null
         }
-        if(key < node.key){
+        if(key < node.key) {
             node.left = removeNode(node.left, key)
             return node
-        } else if(key > node.key){
+        } else if(key > node.key) {
             node.right = removeNode(node.right, key)
             return node
         } else {
-            if(node.left === null && node.right === null){
+            if(node.left === null && node.right === null) {
                 node = null
                 return node
             }
-            if(node.left === null){
+            if(node.left === null) {
                 node = node.right
                 return node
-            } else if(node.right === null){
+            } else if(node.right === null) {
                 node = node.left
                 return node
             }
@@ -86,13 +82,20 @@ function BinarySearchTree(){
         }
     }
 
-    this.min = function(){
+    var findMinNode = function(node) {
+        while(node && node.left !== null) {
+            node = node.left
+        }
+        return node
+    }
+
+    this.min = function() {
         return minNode(root)
     }
 
-    var minNode = function(node){
-        if(node){
-            while(node && node.left !== null){
+    var minNode = function(node) {
+        if(node) {
+            while(node && node.left !== null) {
                 node = node.left
             }
             return node.key
@@ -100,20 +103,13 @@ function BinarySearchTree(){
         return null
     }
 
-    var findMinNode = function(node){
-        while(node && node.left !== null){
-            node = node.left
-        }
-        return node
-    }
-
-    this.max = function(){
+    this.max = function() {
         return maxNode(root)
     }
 
-    var maxNode = function(node){
-        if(node){
-            while(node && node.right !== null){
+    var maxNode = function(node) {
+        if(node) {
+            while(node && node.right !== null) {
                 node = node.right
             }
             return node.key
@@ -121,41 +117,45 @@ function BinarySearchTree(){
         return null
     }
 
-    this.inOrderTraverse = function(callback){
+    this.inOrderTraverse = function(callback) {
         inOrderTraverseNode(root, callback)
     }
 
-    var inOrderTraverseNode = function(node, callback){
-        if(node !== null){
+    var inOrderTraverseNode = function(node, callback) {
+        if(node !== null) {
             inOrderTraverseNode(node.left, callback)
             callback(node.key)
             inOrderTraverseNode(node.right, callback)
         }
     }
 
-    this.preOrderTraverse = function(callback){
-        preOrderTraverse(root, callback)
+    this.preOrderTraverse = function(callback) {
+        preOrderTraverseNode(root, callback)
     }
 
-    var preOrderTraverseNode = function(node, callback){
-        if(node !== null){
+    var preOrderTraverseNode = function(node, callback) {
+        if(node !== null) {
             callback(node.key)
             preOrderTraverseNode(node.left, callback)
             preOrderTraverseNode(node.right, callback)
         }
     }
 
-    this.postOrderTraverse = function(callback){
-        postOrderTraverse(root, callback)
+    this.postOrderTraverse = function(callback) {
+        postOrderTraverseNode(root, callback)
     }
 
-    var postOrderTraverseNode = function(node, callback){
-        if(node !== null){
+    var postOrderTraverseNode = function(node, callback) {
+        if(node !== null) {
             postOrderTraverseNode(node.left, callback)
             postOrderTraverseNode(node.right, callback)
             callback(node.key)
         }
     }
+}
+
+function printNode(value) {
+    console.log(value)
 }
 
 var tree = new BinarySearchTree()
