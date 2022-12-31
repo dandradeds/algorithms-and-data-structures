@@ -1,6 +1,6 @@
 function BinarySearchTree(){
-    var Node = function(){
-        this.key = this.key 
+    var Node = function(key){
+        this.key = key 
         this.left = null
         this.right = null
     }
