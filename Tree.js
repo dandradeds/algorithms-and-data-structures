@@ -178,3 +178,4 @@ tree.insert(6)
 
 console.log(tree.search(16))
 console.log(tree.search(13))
+console.log(tree.search(3))
