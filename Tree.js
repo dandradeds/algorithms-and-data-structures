@@ -50,51 +50,54 @@ function BinarySearchTree() {
     }
 
     this.remove = function(key) {
-        root = removeNode(root, key)
+        root = removeNode(root, key) 
     }
 
-    var removeNode = function(node, key) {
-        if(node === null) {
+    var removeNode = function(node, key) { 
+        if(node === null) {  
             return null
         }
-        if(key < node.key) {
-            node.left = removeNode(node.left, key)
+
+
+        if(key < node.key) { //false
+            node.left = removeNode(node.left, key) 
             return node
-        } else if(key > node.key) {
-            node.right = removeNode(node.right, key)
+        } else if(key > node.key) { 
+            node.right = removeNode(node.right, key) 
             return node
         } else {
-            if(node.left === null && node.right === null) {
-                node = null
+            if(node.left === null && node.right === null) { 
+                node = null 
                 return node
             }
-            if(node.left === null) {
+            if(node.left === null) { 
                 node = node.right
                 return node
-            } else if(node.right === null) {
-                node = node.left
+            } else if(node.right === null) { 
+                node = node.left 
                 return node
             }
-            var aux = findMinNode(node.right)
-            node.key = aux.key
-            node.right = removeNode(node.right, aux.key)
+            var aux = findMinNode(node.right) 
+            node.key = aux.key 
+
+            node.right = removeNode(node.right, aux.key) 
             return node
         }
     }
 
-    var findMinNode = function(node) {
+    var findMinNode = function(node) { 
         while(node && node.left !== null) {
-            node = node.left
+            node = node.left 
         }
         return node
     }
 
     this.min = function() {
-        return minNode(root)
+        return minNode(root) //11
     }
 
-    var minNode = function(node) {
-        if(node) {
+    var minNode = function(node) { //11
+        if(node) { //true 
             while(node && node.left !== null) {
                 node = node.left
             }
@@ -175,7 +178,3 @@ tree.insert(20)
 tree.insert(18)
 tree.insert(25)
 tree.insert(6)
-
-console.log(tree.search(16))
-console.log(tree.search(13))
-console.log(tree.search(3))
