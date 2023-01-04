@@ -77,10 +77,10 @@ function Queue() {
 }
 
 function Graph() {
-    var vertices = []
+    var vertices = [] //de A ate I
     var adjList = new Dictionary()
 
-    this.addVertex = function(v) {
+    this.addVertex = function(v) { //myVertices[i]
         vertices.push(v) //myVertices
         adjList.set(v, []) //myVertices e array vazio 
     }
@@ -108,19 +108,19 @@ function Graph() {
         for(var i = 0; i < vertices.length; i++){
             color[vertices[i]] = 'white'
         }
-        return color 
+        return color //de A ate I = white
     }
 
-    this.bfs = function(v, callback){
+    this.bfs = function(v, callback){ //A, printNode
         var color = initializeColor(),
-        queue = newQueue();
-        queue.enqueue()
+        queue = new Queue();
+        queue.enqueue(v)//A
 
-        while(!queue.isEmpty()){
-            var u = queue.dequeue()
-            neighbors = adjList.get(u)
-            color[u] = 'grey'
-            for(var i = 0;i < neighbors.length; i++){
+        while(!queue.isEmpty()){ //A 
+            var u = queue.dequeue() //A
+            neighbors = adjList.get(u) //VIZINHOS DE A
+            color[u] = 'grey' //A = CINZA 
+            for(var i = 0; i < neighbors.length; i++){
                 var w = neighbors[i]
                 if(color[w] === 'white'){
                     color[w] = 'grey'
@@ -128,8 +128,30 @@ function Graph() {
                 }
             }
             color[u] = 'black'
-            callback[u]
+            callback(u)
         }
+    }
+
+    this.dfs = function(callback){
+        var color = initializeColor()
+        for(var i = 0; i < vertices.length; i++){
+            if(color[vertices[i]] === 'white'){
+                dfsVisit(vertices[i], color, callback)
+            }
+        }
+    }
+    var dfsVisit = function(u, color, callback){
+        color[u] = 'grey'
+        callback(u)
+
+        var neighbors = adjList.get(u)
+        for(var i = 0; i < neighbors.length; i++){
+            var w = neighbors[i]
+            if(color[w] === 'white'){
+                dfsVisit(w, color, callback)
+            }
+        }
+        color[u] = 'black'
     }
 }
 
@@ -154,4 +176,6 @@ graph.addEdge('B', 'E')
 graph.addEdge('B', 'F')
 graph.addEdge('E', 'I')
 
-console.log(graph.toString())
+//console.log(graph.toString())
+
+graph.bfs(myVertices[0], printNode)
