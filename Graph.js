@@ -18,7 +18,9 @@ function Dictionary() {
     }
 
     this.get = function(key) {
+        
         return this.has(key) ? items[key] : undefined
+
     }
 
     this.clear = function() {
@@ -77,12 +79,12 @@ function Queue() {
 }
 
 function Graph() {
-    var vertices = [] //de A ate I
+    var vertices = [] 
     var adjList = new Dictionary()
 
-    this.addVertex = function(v) { //myVertices[i]
-        vertices.push(v) //myVertices
-        adjList.set(v, []) //myVertices e array vazio 
+    this.addVertex = function(v) { 
+        vertices.push(v) 
+        adjList.set(v, []) 
     }
 
     this.addEdge = function(v, w) {
@@ -108,18 +110,18 @@ function Graph() {
         for(var i = 0; i < vertices.length; i++){
             color[vertices[i]] = 'white'
         }
-        return color //de A ate I = white
+        return color 
     }
 
-    this.bfs = function(v, callback){ //A, printNode
+    this.bfs = function(v, callback){ 
         var color = initializeColor(),
         queue = new Queue();
         queue.enqueue(v)//A
 
-        while(!queue.isEmpty()){ //A 
-            var u = queue.dequeue() //A
-            neighbors = adjList.get(u) //VIZINHOS DE A
-            color[u] = 'grey' //A = CINZA 
+        while(!queue.isEmpty()){ 
+            var u = queue.dequeue() 
+            neighbors = adjList.get(u) 
+            color[u] = 'grey'
             for(var i = 0; i < neighbors.length; i++){
                 var w = neighbors[i]
                 if(color[w] === 'white'){
@@ -133,25 +135,28 @@ function Graph() {
     }
 
     this.dfs = function(callback){
-        var color = initializeColor()
-        for(var i = 0; i < vertices.length; i++){
-            if(color[vertices[i]] === 'white'){
+        var color = initializeColor() 
+        for(var i = 0; i < vertices.length; i++){ 
+            if(color[vertices[i]] === 'white'){ 
                 dfsVisit(vertices[i], color, callback)
             }
         }
     }
-    var dfsVisit = function(u, color, callback){
-        color[u] = 'grey'
-        callback(u)
+    
 
-        var neighbors = adjList.get(u)
-        for(var i = 0; i < neighbors.length; i++){
-            var w = neighbors[i]
+    //PRINT -> A B E I F C D G H
+    var dfsVisit = function(u, color, callback){ 
+        color[u] = 'grey' 
+        callback(u) 
+
+        var neighbors = adjList.get(u) 
+        for(var i = 0; i < neighbors.length; i++){ 
+            var w = neighbors[i] 
             if(color[w] === 'white'){
-                dfsVisit(w, color, callback)
+                dfsVisit(w, color, callback) 
             }
         }
-        color[u] = 'black'
+        color[u] = 'black' 
     }
 }
 
@@ -160,6 +165,7 @@ function printNode(value){
 }
 
 var graph = new Graph()
+var dd = new Dictionary()
 var myVertices = ['A', 'B','C','D','E','F','G','H','I']
 for(var i = 0; i < myVertices.length; i++){
     graph.addVertex(myVertices[i])
@@ -178,4 +184,6 @@ graph.addEdge('E', 'I')
 
 //console.log(graph.toString())
 
-graph.bfs(myVertices[0], printNode)
+//graph.bfs(myVertices[0], printNode)
+
+graph.dfs(printNode)
