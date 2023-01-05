@@ -94,10 +94,10 @@ function Graph() {
 
     this.toString = function() {
         var s = ''
-        for(var i = 0; i < vertices.length; i++) {
-            s += vertices[i] + ' -> '
-            var neighbors = adjList.get(vertices[i])
-            for(var j = 0; j < neighbors.length; j++) {
+        for(var i = 0; i < vertices.length; i++) { 
+            s += vertices[i] + ' -> ' //A -> 
+            var neighbors = adjList.get(vertices[i]) //
+            for(var j = 0; j < neighbors.length; j++) { 
                 s += neighbors[j] + ' '
             }
             s += '\n'
@@ -165,8 +165,7 @@ function printNode(value){
 }
 
 var graph = new Graph()
-var dd = new Dictionary()
-var myVertices = ['A', 'B','C','D','E','F','G','H','I']
+var myVertices = ['A', 'B','C','D','E','F','G','H','I','J']
 for(var i = 0; i < myVertices.length; i++){
     graph.addVertex(myVertices[i])
 }
@@ -182,8 +181,8 @@ graph.addEdge('B', 'E')
 graph.addEdge('B', 'F')
 graph.addEdge('E', 'I')
 
-//console.log(graph.toString())
+console.log(graph.toString())
 
 //graph.bfs(myVertices[0], printNode)
 
-graph.dfs(printNode)
+//graph.dfs(printNode)
