@@ -37,28 +37,58 @@ function ArrayList() {
         }
     }
 
-
-    //[5,4,3,2,1]
-    //[4,5,3,2,1]
-    //[4,3,5,2,1]
-    //[3,4,5,2,1]
-    //[3,4,2,5,1]
-    //[3,2,4,5,1]
-    //[2,3,4,5,1]
-    //[1,2,3,4,5]
-
     this.insertionSort = function(){
         var j, temp 
-        for(var i = 1; i < array.length; i++){ //4
-            j = i //[4]
-            temp = array[i] //1
-//                 [1]            2        1
+        for(var i = 1; i < array.length; i++){ 
+            j = i 
+            temp = array[i] 
             while(j > 0 && array[j - 1] > temp){ 
-                array[j] = array[j - 1] // 2
-                j-- // 0
+                array[j] = array[j - 1] 
+                j-- 
             }
-            array[j] = temp //
+            array[j] = temp 
         }
+    }
+
+    this.mergeSort = function(){
+        array = mergeSortRec(array)
+    }
+
+
+    var mergeSortRec = function(array){
+        var length = array.length 
+        if(length === 1) {
+            return array 
+        }
+        var mid = Math.floor(length / 2), 
+        left = array.slice(0, mid), 
+        rigth = array.slice(mid, length) 
+
+        return merge(mergeSortRec(left), mergeSortRec(rigth))
+    }
+
+    var merge = function(left, rigth){
+        var result = [],
+        il = 0,
+        ir = 0
+
+        while(il < left.length && ir < rigth.length){
+            if(left[il] < rigth[ir]){
+                result.push(left[il++])
+            } else {
+                result.push(rigth[ir++])
+            }
+        }
+
+        while(il < left.length){
+            result.push(left[il++])
+        }
+
+        while(ir < rigth.length){
+            result.push(rigth[ir++])
+        }
+
+        return result
     }
 
     var swap = function(array, index1, index2){ 
@@ -69,13 +99,16 @@ function ArrayList() {
 }
 
 var al = new ArrayList()
+
+al.insert(8)
+al.insert(7)
+al.insert(6)
 al.insert(5)
 al.insert(4)
 al.insert(3)
 al.insert(2)
 al.insert(1)
 
-//al.bubbleSort()
-//al.selectionSort()
-al.insertionSort()
+al.mergeSort()
+
 console.log(al.toString());
