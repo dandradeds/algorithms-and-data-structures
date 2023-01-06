@@ -94,38 +94,39 @@ function ArrayList() {
         quick(array, 0, array.length - 1)
     }
 
-    var quick = function(array, left, right){
-        var index
-        if(array.length > 1){
-            index = partition(array,left,right)
-            if(left < index - 1){
-                quick(array,left, index - 1)
+
+    var quick = function(array, left, right){  
+        var index 
+        if(array.length > 1){  
+            index = partition(array,left,right) 
+            if(left < index - 1){  
+                quick(array,left, index - 1) 
             }
-            if(index < right){
-                quick(array, index, right)
+            if(index < right){ 
+                quick(array, index, right) 
             }
         }
     }
 
-    var partition = function(array, left, right){
-        var pivot = array[Math.floor((right + left) / 2)],
+    var partition = function(array, left, right){  
+        var pivot = array[Math.floor((right + left) / 2)], 
         i = left,
         j = right
 
         while(i <= j){
-            while(array[i] < pivot){
+            while(array[i] < pivot){ 
                 i++
             }
-            while(array[j] > pivot){
+            while(array[j] > pivot){ 
                 j--
             }
-            if(i <= j){
-                swap(array, i, j)
+            if(i <= j){ 
+                swap(array, i, j) 
                 i++
                 j--
             }
         }
-        return i 
+        return i  
     }
 
     var swap = function(array, index1, index2){ 
@@ -137,13 +138,14 @@ function ArrayList() {
 
 var al = new ArrayList()
 
-al.insert(8)
-al.insert(7)
-al.insert(6)
-al.insert(5)
-al.insert(4)
 al.insert(3)
-al.insert(2)
+al.insert(5)
 al.insert(1)
+al.insert(6)
+al.insert(4)
+al.insert(7)
+al.insert(2)
 
+
+al.quickSort()
 console.log(al.toString());
