@@ -119,11 +119,11 @@ function ArrayList() {
             while(array[j] > pivot){
                 j--
             }
-        }
-        if(i <= j){
-            swap(array, i, j)
-            i++
-            j--
+            if(i <= j){
+                swap(array, i, j)
+                i++
+                j--
+            }
         }
         return i 
     }
